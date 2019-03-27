@@ -1,0 +1,105 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>激活码领取</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link href="css/vip-page.css" rel="stylesheet" />
+	</head>
+
+	<body class="mui-hidden" style="position: relative;min-height: 100%;">
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">激活码领取</h1>
+		</header>
+		<div id="collections" class="mui-content collection-code-container">
+			<div class="section-top">
+				<img src="image/activation_code_collection02.png">
+				<h2>服务站</h2>
+			</div>
+			<div class="section-body">
+				<div class="section-shell">
+					<div class="section-items">
+						<h2>服务中心激活码</h2>
+						<div class="section-input">
+							<input type="number" v-model="srCoder"><label>个</label>
+						</div>
+					</div>
+					<div class="section-items">
+						<h2>服务站激活码</h2>
+						<div class="section-input">
+							<input type="number" v-model="reversedMessage"><label>个</label>
+						</div>
+					</div>
+					<div class="section-items">
+						<h2>创客激活码</h2>
+						<div class="section-input">
+							<input type="number" v-model="ckCoder"><label>个</label>
+						</div>
+					</div>
+					<div class="section-items">
+						<h2>VIP激活码</h2>
+						<div class="section-input">
+							<input maxlength="6" type="number" v-model="vipCoder"><label>个</label>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="confirm-section">
+				<button type="button">确定</button>
+				<p>确定领取后将无法更改</p>
+			</div>
+		</div>
+		<script src="js/mui.js"></script>
+		<script src="js/vue.min.js"></script>
+		<script src="js/jquery3.3.1.min.js"></script>
+		<script type="text/javascript">
+			mui.init();
+			// 初始化字体大小
+			var viewport = document.documentElement.clientWidth;
+			if (viewport > 750) {
+				viewport = 750
+			}
+			document.documentElement.style.fontSize = viewport / 7.5 + "px";
+			// 初始化字体大小结束
+			document.querySelector(".mui-hidden").classList.remove("mui-hidden");
+			// vue实例初始化
+			var collection = new Vue({
+				el: "#collections",
+				data: {
+					srCoder: 0, 
+					znCoder: 0, 
+					ckCoder: 0, 
+					vipCoder: 0 
+				},
+				mounted: function() {
+					mui.init();
+					mui.plusReady(function() {
+						logs("激活码领取")
+					});
+				},
+				computed: {
+					reversedMessage: function() {
+						var num=(50-this.srCoder)*50;
+						return num;
+					}
+				}
+			})
+			$(function() {
+				$('input').bind('input propertychange', function() {
+					var obj = $(this);
+					var text_length = obj.val().length;
+					var width = parseInt(text_length) * 16;
+					if (width < 100) {
+						obj.css('width', width + 'px');
+					} else {
+						obj.css('width', 100 + 'px');
+					}
+				});
+			})
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title></title>
+		<style type="text/css">
+			* {
+				margin: 0;
+				padding: 0;
+			}
+
+			#header {
+				height: 44px;
+				width: 100%;
+				line-height: 44px;
+				position: absolute;
+				z-index: 2;
+				left: 0;
+				top: 0;
+				background: cornflowerblue;
+			}
+
+			button {
+				padding: 10px;
+				margin: 10px;
+			}
+		</style>
+	</head>
+	<body>
+		<a href="box.html"></a>
+		<div id="header">播放器</div>
+		<div style="padding-top:66px;">
+			<span id="dtxt"></span><br />
+			<button onclick="play();"> &gt; 播放</button>
+			<button onclick="pause();"> || 暂停</button>
+		</div>
+		<script type="text/javascript" src="js/mui.js">
+			
+		</script>
+		<script type="text/javascript">
+			var audioUrl = 'https://qiniu.henpi.vip/voice/henpi/dy/125076578/20190311200902994.mp3';
+			var downLoadurl = '_downloads/1.mp3';
+
+			function play() {
+				//首先判断音频文件是否下载
+				plus.io.resolveLocalFileSystemURL(
+					downLoadurl,
+					function(entry) {
+						//文件已经下载直接播放
+						if (entry.isFile) {
+							plus.nativeUI.toast('开始播放');
+							playBase(downLoadurl);
+						}
+					},
+					//文件不存在进行下载
+					function(e) {
+						plus.nativeUI.toast('开始下载');
+						plus.nativeUI.showWaiting();
+						var downloader = plus.downloader.createDownload(audioUrl, {
+							filename: '_downloads/1.mp3'
+						}, function(d, status) {
+							//下载完毕
+							plus.nativeUI.toast('下载完毕');
+							plus.nativeUI.closeWaiting();
+							playBase(downLoadurl);
+							console.log(status);
+						});
+						downloader.start();
+					}
+				);
+			}
+			var player = null,
+				pausing = false;
+
+			function playBase(aurl) {
+				//监测暂停
+				if (pausing) {
+					player.resume();
+					return;
+				}
+				player = plus.audio.createPlayer(aurl);
+				player.play();
+			}
+
+			function pause() {
+				pausing = true;
+				player.pause();
+			}
+			//扩展知识app切换到后台时暂停切换到前端时继续播放
+			document.addEventListener('pause', function() {
+				if (player) {
+					pause();
+				}
+			});
+			document.addEventListener('resume', function() {
+				if (player) {
+					play();
+				}
+			});
+		</script>
+	</body>
+</html>
