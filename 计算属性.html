@@ -4,18 +4,96 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<title>计算属性</title>
+		<style type="text/css">
+			table,
+			table tr th,
+			table tr td {
+				border: 1px solid #666;
+			}
+
+			table {
+				min-width: 300px;
+				min-height: 25px;
+				line-height: 25px;
+				text-align: center;
+				border-collapse: collapse;
+			}
+
+			table tr td {
+				text-align: left;
+				padding-left: 5px;
+			}
+
+			input {
+				width: 100%;
+				height: 100%;
+				border: none;
+				box-sizing: border-box;
+			}
+
+			input:focus {
+				outline: none;
+			}
+		</style>
 	</head>
 	<body>
 		<div id="container">
-			{{name}}
+			<table border="" cellspacing="" cellpadding="">
+				<thead>
+					<th>学科</th>
+					<th>分数</th>
+				</thead>
+				<tbody>
+					<tr>
+						<td>数学</td>
+						<td><input type="text" v-model.number="math"></td>
+					</tr>
+					<tr>
+						<td>物理</td>
+						<td><input type="text" v-model.number="physics" /></td>
+					</tr>
+					<tr>
+						<td>英语</td>
+						<td><input type="text" v-model.number="english" /></td>
+					</tr>
+					<tr>
+						<td>平均分</td>
+						<td>{{average}}</td>
+					</tr>
+					<tr>
+						<td>总分</td>
+						<td>{{sum}}</td>
+					</tr>
+				</tbody>
+			</table>
 		</div>
 		<script type="text/javascript" src="js/vue.js"></script>
-		<script type="text/javascript" >
-			var cont=new Vue({
-				el:"#container",
-				data(){
-					return{
-						name:"王花花"
+		<script type="text/javascript">
+			var cont = new Vue({
+				el: "#container",
+				data() {
+					return {
+						math: 90,
+						physics: 80,
+						english: 60
+					}
+				},
+				computed: {
+					sum: function() {
+						var sumNum = parseFloat(this.math) + parseFloat(this.physics) + parseFloat(this.english);
+						if (isNaN(sumNum)) {
+							return "请输入数字！"
+						} else {
+							return sumNum;
+						}
+					},
+					average: function() {
+						var book = Math.round(this.sum / 3);
+						if (isNaN(book)) {
+							return "请输入数字！"
+						} else {
+							return book;
+						}
 					}
 				}
 			})
