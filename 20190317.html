@@ -1,67 +1,81 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-    <meta charset="utf-8">
-    <title>javascript练习</title>
-</head>
+	<head>
+		<meta charset="utf-8">
+		<title>javascript练习</title>
+	</head>
 
-<body>
-    <script type="text/javascript">
-    //1、------------------------		
-    // 逗号操作符var t=(1,2)返回2
-    // 	var f = (
-    // 		function f() {
-    // 			return "1";
-    // 		},
-    // 		function g() {
-    // 			return 2;
-    // 		}
-    // 	)();
-    // 	console.log(typeof(f));
-    // 	结果为number
-    //-------------------------
+	<body>
+		<script type="text/javascript">
+			//1、------------------------		
+			// 逗号操作符var t=(1,2)返回2
+			// 	var f = (
+			// 		function f() {
+			// 			return "1";
+			// 		},
+			// 		function g() {
+			// 			return 2;
+			// 		}
+			// 	)();
+			// 	console.log(typeof(f));
+			// 	结果为number
+			//-------------------------
 
-    //2、-----------------------
-    // 	var x=1;
-    // 	if(function f(){}){
-    // 		x+=typeof f;
-    // 	}
-    // 	console.log(x);
-    // 结果为1undefined
-    //-------------------------
+			//2、-----------------------
+			// 	var x=1;
+			// 	if(function f(){}){
+			// 		x+=typeof f;
+			// 	}
+			// 	console.log(x);
+			// 结果为1undefined
+			//-------------------------
 
-    //-3、---------------------
-    // undefined==null true
-    // 以下值均为false
-    // undefined>0			
-    // undefined<0			
-    // undefined==0		
-    // null>0 			    	
-    // null<0 			    		
-    // null==0 	
-    // undefined===null
-    // NaN==NaN
-    // NaN===NaN
-    // isNaN("100")
-    // parseInt("la")==1
-    // 实现isNaN效果
-    //	function myIsNaN(num){
-    // 		var ret=Number(num);
-    // 		ret +="";
-    // 		if(ret=="NaN"){
-    // 			return true;
-    // 		}else{
-    // 			return false;
-    // 		}
-    // 	}
-    //-------------------------
+			//-3、---------------------
+			// undefined==null true
+			// 以下值均为false
+			// undefined>0			
+			// undefined<0			
+			// undefined==0		
+			// null>0 			    	
+			// null<0 			    		
+			// null==0 	
+			// undefined===null
+			// NaN==NaN
+			// NaN===NaN
+			// isNaN("100")
+			// parseInt("la")==1
+			// 实现isNaN效果
+			//	function myIsNaN(num){
+			// 		var ret=Number(num);
+			// 		ret +="";
+			// 		if(ret=="NaN"){
+			// 			return true;
+			// 		}else{
+			// 			return false;
+			// 		}
+			// 	}
+			//-------------------------
 
-    //3------------------------
+			//3------------------------
+
+			// 	var x = 1;
+			// 	(function() {
+			// 		console.log(x);
+			// 		var x = 2;
+			// 		// 打印undefined，变量提升,值不会提升
+			// 	}());
+
+			//-------------------------
+
+			//4------------------------
+
+			//-------------------------
 
 
-    //-------------------------
-    </script>
-</body>
+			//3------------------------
+			//-------------------------
+		</script>
+	</body>
 
 </html>
