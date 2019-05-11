@@ -1,41 +1,71 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="utf-8">
-		<title></title>
-	</head>
-	<body>
-		<script>
-			var t = new Vue({
-				el: '#app',
-				data: {
-					tabledata: [],
-					countdata: [],
-					nowtime: '',
-				},
-				mounted() {
-					//mui  
-					mui.plusReady(function() {
-						mui.init({
-							swipeBack: true, //启用右滑关闭功能  
-							pullRefresh: {
-								container: '#refreshContainer',
-								down: {
-									contentrefresh: '正在加载...',
-									callback: pulldownRefresh
-								},
-								...
-							}
-						});
-					});
-				},
-				filters: {
-					getPaydatetime: function(value) {
-						var t = value / 1000;
-						return getLocalTime(t);
-					}
-				}
-			});
-		</script>
-	</body>
-</html>
+<!-- 过滤器 -->
+<template>
+  <div class="filters">
+    <h1 v-text="filtersTitle"></h1>
+    <input v-model="filtersText"/>
+    <div>{{filtersText | filtersTextChange}}</div>
+  </div>
+</template>
+<script>
+  let vm = {};
+  export default {
+    data() {
+      vm = this;
+      return {
+        filtersTitle: 'vue过滤器学习，filters',
+        arrayList: [
+          {
+            "code": "1",
+            "value": "北京市"
+          },
+          {
+            "code": "2",
+            "value": "上海市"
+          },
+          {
+            "code": "3",
+            "value": "广州市"
+          },
+          {
+            "code": "4",
+            "value": "深圳市"
+          },
+          {
+            "code": "5",
+            "value": "杭州市"
+          },
+          {
+            "code": "6",
+            "value": "天津市"
+          },
+          {
+            "code": "7",
+            "value": "西安市"
+          },
+          {
+            "code": "8",
+            "value": "武汉市"
+          },
+          {
+            "code": "9",
+            "value": "长沙市"
+          }
+        ],
+        filtersText: '1',
+      }
+    },
+    filters: {
+      filtersTextChange: function (dataStr) {
+        let arrayList = vm.arrayList;
+        let value = '没有这个城市 ';
+        for (let b of arrayList) {
+          if (b.code == dataStr) {
+            value = b.value;
+            break;
+          }
+        }
+        return value;
+      }
+    }
+  }
+</script>
