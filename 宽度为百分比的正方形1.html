@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<title>try_catch</title>
+		<style type="text/css">
+			body{
+				margin: 0;
+			}
+			.square-container {
+				width: 25%;
+				height: auto;
+				background-color: #999999;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				color: #DDDDDD;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="square-container">
+			你好啊！
+		</div>
+		<div class="square-container-bing">
+			你好啊！
+		</div>
+		<div class="square-container-bing">
+			你好啊！
+		</div>
+		<script>
+			window.onload=function(){
+				var square_arr = [];
+				try {
+					arr = document.querySelectorAll(".square-container");
+					if (arr) {
+						for (var i = 0; i < arr.length; i++) {
+							arr[i].style.height=arr[i].offsetWidth+"px";
+						}
+					}
+				} catch (e) {
+					console.log(e);
+				}
+			}
+		</script>
+
+	</body>
+</html>
