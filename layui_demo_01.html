@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="layui/css/layui.css">
+		<style type="text/css">
+			p span {
+				color: #FF0000;
+				font-weight: bold;
+			}
+		</style>
+	</head>
+	<body>
+		<form class="layui-form" action="">
+			<div class="layui-form-item" pane="">
+				<label class="layui-form-label">原始复选框</label>
+				<div class="layui-input-block">
+					<input type="checkbox" name="like1[write]" lay-skin="primary" title="写作" checked="">
+					<input type="checkbox" name="like1[read]" lay-skin="primary" title="阅读">
+					<input type="checkbox" name="like1[game]" lay-skin="primary" title="游戏" disabled="">
+				</div>
+			</div>
+		</form>
+		<script src="layui/layui.js"></script>
+		<script>
+			layui.use(['form', 'layedit', 'laydate'], function() {
+				var form = layui.form;
+			});
+		</script>
+	</body>
+</html>
