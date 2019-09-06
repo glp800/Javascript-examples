@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<title></title>
+		<style type="text/css">
+			@-webkit-keyframes arrowd {
+				from {
+					margin-top: 0;
+					opacity: 1;
+				}
+
+				to {
+					margin-top: 30px;
+					opacity: 0.3;
+				}
+			}
+
+			.rightan {
+				width: 100px;
+				height: 100px;
+				position: relative;
+				background: #2289FF;
+				text-align: center;
+				float: left;
+			}
+
+			.rightan img {
+				-webkit-animation: arrowd 1s infinite;
+				-webkit-animation-fill-mode: both;
+			}
+
+			.msg-bubble {
+				margin: 20px;
+				position: relative;
+				width: 200px;
+				min-height: 40px;
+				background-color: #DDDDDD;
+				border-radius: 5px;
+				float: left;
+				padding: 10px;
+				text-align: justify;
+				box-sizing: border-box;
+				display: flex;
+				align-items: center;
+			}
+
+			.msg-bubble:before {
+				content: '';
+				display: block;
+				position: absolute;
+				width: 12px;
+				height: 12px;
+				background-color: #DDDDDD;
+				top: 50%;
+				-webkit-transform: translate(-130%, -50%) rotate(45deg);
+				transform: translate(-130%, -50%) rotate(45deg);
+			}
+			.msg-bubble p{
+				background-color: #DDDDDD;
+				margin: 0;
+				color: #333333;
+				z-index: 2;
+				font-size: 13px;
+			}
+
+			[v-cloak] {
+				display: none;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="main_container" v-cloak>
+			<div class="rightan">
+				<img src="image/arrow-down.png">
+			</div>
+			<!-- 气泡 -->
+			<div class="msg-bubble"><p>{{cont}}</p></div>
+			<input type="text" v-model="cont" placeholder="请输入内容">
+		</div>
+		<script type="text/javascript" src="js/vue.js"></script>
+		<script type="text/javascript">
+			var app = new Vue({
+				el: "#main_container",
+				data: {
+					cont: ''
+				},
+				created() {
+
+				},
+				methods: {
+
+				},
+				mounted() {
+
+				}
+			})
+		</script>
+	</body>
+</html>
