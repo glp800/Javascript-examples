@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script>
+			// let [a, b, c = '暂无数据'] = ['aa', 'bb']; //可以指定默认值
+			// console.log(a, b, c)
+
+			// 交换两个数的位置
+			// let a = 5;
+			// let b = 12;
+			// [a, b] = [b, a]
+			// console.log(b)
+			
+			function getpos(){
+				return{
+					name:'apple',
+					age:25
+				}
+			}
+			let {name,age}=getpos();
+			console.log(name,age);
+		</script>
+	</body>
+</html>

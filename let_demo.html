@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			const log = n_r => {
+				console.log(n_r);
+			}
+			// let相当于之前的var 'variable' 块级作用域{} 不会变量提升
+			// const 常量 定义之后不可更改
+			if(true){
+				// var a=12;
+				let a=12; //外部无法访问
+			}
+			log(a) //12 var
+			log(a) //12 let
+		</script>
+	</body>
+</html>

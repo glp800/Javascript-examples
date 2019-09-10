@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>排序</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	</head>
+
+	<body>
+
+		<script>
+			// 冒泡排序
+			// var miss=[1,5,556,36,5,7,9,32,45,56,2,58,4,6]
+			// const bubbleSort = arr => {
+			// 	const len = arr.length - 1
+			// 	for (let i = 0; i < len; ++i) { /* 外循环为排序趟数，len个数进行len-1趟 */
+			// 		for (let j = 0; j < len - i; ++j) { /* 内循环为每趟比较的次数，第i趟比较len-i次 */
+			// 			if (arr[j] > arr[j + 1]) { /* 相邻元素比较，若逆序则交换（升序为左大于右，逆序反之） */
+			// 				[arr[j], arr[j + 1]] = [arr[j + 1], arr[j]]
+			// 			}
+			// 		}
+			// 	}
+			// 	return arr
+			// }
+			// bubbleSort(miss);
+			// console.log(miss);
+			// 选择排序
+			// var miss1=[1,5,556,36,5,7,9,32,45,56,2,58,4,6]
+			// const selectionSort = arr => {
+			//     const len = arr.length
+			//     let min
+			//     for (let i = 0; i < len - 1; ++i) {
+			//         min = i /* 初始化未排序序列中最小数据数组下标 */
+			//         for (let j = i + 1; j < len; ++j) { /* 访问未排序的元素 */
+			//             if (arr[j] < arr[min]) { /* 找到目前最小值 */
+			//                 min = j /* 记录最小值 */
+			//             }
+			//         }
+			//         [arr[i], arr[min]] = [arr[min], arr[i]] /* 交换位置 */
+			//     }
+			//     return arr
+			// }
+			// selectionSort(miss1);
+			// console.log(miss1);
+			// 插入排序
+			// var miss2=[1,5,556,36,5,7,9,32,45,56,2,58,4,6]
+			// const insertionSort = arr => {
+			//     const len = arr.length
+			//     let j, temp
+			//     for (let i = 0; i < len; ++i) {
+			//         j = i - 1
+			//         temp = arr[i]
+			//         while (j >= 0 && arr[j] > temp) {
+			//           arr[j + 1] = arr[j]
+			//           j--
+			//         }
+			//         arr[j + 1] = temp
+			//     }
+			//     return arr
+			// }
+			// selectionSort(miss2);
+			// console.log(miss2);
+
+			// 希尔排序（Shell Sort）
+			// var miss3=[1,5,556,36,5,7,9,32,45,56,2,58,4,6]
+			// const shellSort = arr => {
+			//     let gaps = [5, 3, 1] // 定义步长以及分割次数
+			//     let len = arr.length
+			//     for (let g = 0, gLen = gaps.length; g < gaps.length; ++g) {
+			//         for (let i = gaps[g]; i < len; ++i) {
+			//             let temp = arr[i], j
+			//             for (j = i; j >= gaps[g] && arr[j - gaps[g]] > arr[i]; j -= gaps[g]) {
+			//                 arr[j] = arr[j - gaps[g]]
+			//             }
+			//             arr[j] = temp
+			//         }
+			//     }
+			//     return arr
+			// }
+			// shellSort(miss3);
+			// console.log(miss3);
+
+			// es5快速排序
+			// var miss9 = [5, 45, 9, 56, 7, 32, 1]
+			// const quickSort = arr => {
+			// 	const len = arr.length
+			// 	if (len < 2) {
+			// 		return arr
+			// 	}
+			// 	const pivot = arr[0]
+			// 	const left = []
+			// 	const right = []
+			// 	for (let i = 1; i < len; ++i) {
+			// 		if (arr[i] >= pivot) {
+			// 			right.push(arr[i])
+			// 		}
+			// 		if (arr[i] < pivot) {
+			// 			left.push(arr[i])
+			// 		}
+			// 	}
+			// 	return [...quickSort(left), pivot, ...quickSort(right)]
+			// }
+			// console.log(quickSort(miss9))
+			// return quickSort(left).concat([pivot], quickSort(right));
+			
+			// 三路快速排序
+			var miss5=[1,5,556,36,5,7,9,32,45,56,2,58,4,6]
+			const quickSortThree = arr => {
+			    const len = arr.length
+			    if (len < 2) {
+			        return arr
+			    }
+			    let left = []
+			    let center = []
+			    let right = []
+			    let pivot = arr[0]
+			    for (let i = 0; i < len; ++i) {      
+			        if (arr[i] < pivot) {
+			            left.push(arr[i])
+			        } else if (arr[i] === pivot) {
+			            center.push(arr[i])
+			        } else {
+			            right.push(arr[i])
+			        }
+			    }
+			    return [...quickSortThree(left), ...center, ...quickSortThree(right)]
+			}
+			console.log(quickSortThree(miss5))
+
+
+			// 特别的冒泡排序——鸡尾酒排序
+			// var miss6=[1,5,556,36,5,7,9,32,45,56,2,58,4,6]
+			// const cocktailSort = arr => {
+			//     let i
+			//     let left = 0
+			//     let right = arr.length - 1
+			//     while (left < right) {
+			//         for (i = left; i < right; ++i)
+			//             if (arr[i] > arr[i + 1]) {
+			//                 [arr[i], arr[i + 1]] = [arr[i + 1], arr[i]]
+			//             }
+			//         right--
+			//         for (i = right; i > left; --i)
+			//             if (arr[i - 1] > arr[i]) {
+			//                 [arr[i], arr[i - 1]] = [arr[i - 1], arr[i]]
+			//             }
+			//         left++
+			//     }
+			//     return arr
+			// }
+			// cocktailSort(miss6)
+			// console.log(miss6)
+			
+			// es6快速排序
+			// var miss = [5, 45, 9, 56, 7, 32, 1,445,369,34,33,566123,65,3,356,18,36,599,6,86]
+			// 
+			// let qsort = fn => ([x, ...xn]) => x == null ? [] : [
+			// 	...qsort(fn)(xn.filter(a => fn(a, x))),
+			// 	x,
+			// 	...qsort(fn)(xn.filter(a => !fn(a, x)))
+			// ]
+			// 
+			// console.log(qsort((a, b) => a < b)(miss))
+		</script>
+	</body>
+
+</html>
