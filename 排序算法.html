@@ -105,28 +105,28 @@
 			// }
 			// console.log(quickSort(miss9))
 			// return quickSort(left).concat([pivot], quickSort(right));
-			
+
 			// 三路快速排序
-			var miss5=[1,5,556,36,5,7,9,32,45,56,2,58,4,6]
+			var miss5 = [1, 5, 556, 36, 5, 7, 9, 32, 45, 56, 2, 58, 4, 6]
 			const quickSortThree = arr => {
-			    const len = arr.length
-			    if (len < 2) {
-			        return arr
-			    }
-			    let left = []
-			    let center = []
-			    let right = []
-			    let pivot = arr[0]
-			    for (let i = 0; i < len; ++i) {      
-			        if (arr[i] < pivot) {
-			            left.push(arr[i])
-			        } else if (arr[i] === pivot) {
-			            center.push(arr[i])
-			        } else {
-			            right.push(arr[i])
-			        }
-			    }
-			    return [...quickSortThree(left), ...center, ...quickSortThree(right)]
+				const len = arr.length
+				if (len < 2) {
+					return arr
+				}
+				let left = []
+				let center = []
+				let right = []
+				let pivot = arr[0]
+				for (let i = 0; i < len; ++i) {
+					if (arr[i] < pivot) {
+						left.push(arr[i])
+					} else if (arr[i] === pivot) {
+						center.push(arr[i])
+					} else {
+						right.push(arr[i])
+					}
+				}
+				return [...quickSortThree(left), ...center, ...quickSortThree(right)]
 			}
 			console.log(quickSortThree(miss5))
 
@@ -153,17 +153,16 @@
 			// }
 			// cocktailSort(miss6)
 			// console.log(miss6)
-			
+
 			// es6快速排序
-			// var miss = [5, 45, 9, 56, 7, 32, 1,445,369,34,33,566123,65,3,356,18,36,599,6,86]
-			// 
-			// let qsort = fn => ([x, ...xn]) => x == null ? [] : [
-			// 	...qsort(fn)(xn.filter(a => fn(a, x))),
-			// 	x,
-			// 	...qsort(fn)(xn.filter(a => !fn(a, x)))
-			// ]
-			// 
-			// console.log(qsort((a, b) => a < b)(miss))
+
+
+			var miss = [5, 45, 9, 56, 7, 32, 1, 445, 369, 34, 33, 566123, 65, 3, 356, 18, 36, 599, 6, 86]
+			let qsort = fn => ([x, ...xn]) => x == null ? [] : [...qsort(fn)(xn.filter(a => fn(a, x))),x,...qsort(fn)(xn.filter(a => !fn(a, x)))]
+			console.log(qsort((a, b) => a < b)(miss))
+			
+			
+			
 		</script>
 	</body>
 
