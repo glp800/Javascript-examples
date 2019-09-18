@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<title></title>
+		<style type="text/css">
+			#roster,
+			#roster tr {
+				width: auto;
+				border: 1px solid #000000;
+				border-collapse: collapse;
+			}
+
+			#roster td {
+				border: 1px solid #000000;
+				padding: 10px;
+				text-align: center;
+			}
+		</style>
+	</head>
+	<body>
+		<table id="roster">
+			<tr>
+				<td>姓名</td>
+				<td>性别</td>
+				<td>成绩</td>
+				<td>平时分</td>
+				<td>综合成绩</td>
+			</tr>
+		</table>
+		<script type="text/javascript">
+			var rootElement = document.getElementById('roster');
+
+			class Student {
+				constructor(name, gender, score) {
+					this.name = name;
+					this.gender = gender;
+					this.score = score;
+					this.quality = 100;
+					this.mount();
+				}
+				// 计算总成绩
+				sumScore() {
+					return this.score + this.quality;
+				}
+				// 将数据转换为html并插入表格中
+				mount() {
+					// 创建元素
+					var tr = document.createElement('tr');
+					tr.innerHTML = '<td>' + this.name + '</td>' +
+						'<td>' + this.gender + '</td>' +
+						'<td>' + this.score + '</td>' +
+						'<td>' + this.quality + '</td>' +
+						'<td>' + this.sumScore() + '</td>';
+					rootElement.appendChild(tr);
+				}
+			}
+			// 创建对象
+			var lsd = new Student('lsd', 'male', 80);
+			var whh = new Student('whh', 'female', 98);
+			var liu = new Student('刘备备', 'male', 88);
+		</script>
+	</body>
+</html>
