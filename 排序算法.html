@@ -155,15 +155,15 @@
 			// console.log(miss6)
 			
 			// es6快速排序
-			// var miss = [5, 45, 9, 56, 7, 32, 1,445,369,34,33,566123,65,3,356,18,36,599,6,86]
-			// 
-			// let qsort = fn => ([x, ...xn]) => x == null ? [] : [
-			// 	...qsort(fn)(xn.filter(a => fn(a, x))),
-			// 	x,
-			// 	...qsort(fn)(xn.filter(a => !fn(a, x)))
-			// ]
-			// 
-			// console.log(qsort((a, b) => a < b)(miss))
+			var miss = [5, 45, 9, 56, 7, 32, 1,445,369,34,33,566123,65,3,356,18,36,599,6,86]
+			
+			let qsort = fn => ([x, ...xn]) => x == null ? [] : [
+				...qsort(fn)(xn.filter(a => fn(a, x))),
+				x,
+				...qsort(fn)(xn.filter(a => !fn(a, x)))
+			]
+			
+			console.log(qsort((a, b) => a < b)(miss))
 		</script>
 	</body>
 
