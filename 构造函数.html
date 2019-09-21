@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			function person(name, age, sex, job, location) {
+				this.name = name;
+				this.age = age;
+				this.sex = sex;
+				this.job = job;
+				this.location = location;
+				this.talk = 'my name is ' + this.name + " from " + this.location;
+			}
+			
+			// var Person = function() {
+			// 	this.name = 'name';
+			// 	this.age = '18';
+			// 	this.num = [1, 2, 3, 5, 9];
+			// }
+
+			var p1 =new Person();
+
+			console.log(p1.age);
+			
+			Person.age = 50;
+			console.log(p1.age);
+		</script>
+	</body>
+</html>

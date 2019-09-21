@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			// 构造器ES5
+			function Student(name, gender, score) {
+				this.name = name;
+				this.gender = gender;
+				this.score = score;
+				this.quality = 100;
+				this.sumScore = function() {
+					return this.score + this.quality;
+				}
+			}
+			var lsd = new Student('lsd', '男', 98);
+			console.log(lsd.name, lsd.sumScore());
+
+
+			// ES6实现
+			class Students {
+				constructor(name, gender, score) {
+					this.name = name;
+					this.gender = gender;
+					this.score = score;
+					this.quality = 100;
+				}
+				sumScore() {
+					return this.score + this.quality;
+				}
+			}
+			var whh = new Students('whh', '男', 60);
+			console.log(whh.name, whh.sumScore());
+		</script>
+	</body>
+</html>
