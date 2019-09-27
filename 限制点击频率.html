@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+	</head>
+	<body>
+		<button type="button" onclick="start(fnn)">打印你好</button>
+
+		<script>
+			var fnn=function(){
+				console.log("需要执行的函数");
+			}
+			
+			var time = 10,
+				timer = null;
+			function start(fn) {
+				if (time===10) {
+					timer = setInterval(function() {
+						time--;
+						console.log(time);
+						if (time == 0) {
+							time=10;
+							clearInterval(timer);
+						}
+					}, 100);
+					fn();
+				} else {
+					return false;
+				}
+			}
+		</script>
+	</body>
+</html>
