@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<style type="text/css">
+			body {
+				margin: 0;
+			}
+
+			.container {
+				width: 100%;
+				font-size: 0
+			}
+
+			.container img {
+				width: 100%;
+				height: auto;
+				outline: medium;
+			}
+
+			.verify-btn {
+				background-color: ;
+				border: none;
+				outline: none;
+				box-shadow: none;
+				width: 80%;
+				height: 48px;
+				background-color: #ad0101;
+				color: #FFFFFF;
+				margin: 20% 10% 5%;
+				border-radius: 5px;
+				font-size: 16px;
+			}
+
+			.container .tips {
+				color: #757575;
+				font-size: 14px;
+				text-align: center;
+			}
+
+			.module-container {
+				position: fixed;
+				top: 0;
+				bottom: 0;
+				width: 100%;
+				z-index: 9;
+				background-color: rgba(0, 0, 0, .5);
+				display: none;
+				align-items: center;
+				justify-content: center;
+			}
+
+			.module-container.active {
+				display: flex;
+			}
+
+			.module-inside {
+				width: 80%;
+				height: 70%;
+				position: relative;
+				display: flex;
+				justify-content: space-between;
+				flex-direction: column;
+				border-radius: 3px;
+				background-color: #AD0101;
+			}
+
+			.module-inside-top {
+				text-align: center;
+			}
+
+			.module-inside-top h4,
+			.module-inside-top h2 {
+				color: #FFFFFF;
+			}
+
+			.module-inside-top h4 {
+				font-size: 17px;
+			}
+
+			.module-inside-top h2 {
+				font-size: 25px;
+			}
+
+			.header-img {
+				display: inline-block;
+				width: 55px;
+				height: 55px;
+				object-fit: cover;
+				border-radius: 50%;
+				margin-top: -27.5px;
+			}
+
+			.close-btn {
+				position: absolute;
+				width: 28px;
+				right: -14px;
+				top: -14px;
+			}
+
+			.module-inside-btm {
+				background-color: #FFFFFF;
+				height: 58%;
+				padding: 25px 12px 0;
+				border-bottom-left-radius: 3px;
+				border-bottom-right-radius: 3px;
+			}
+
+			.module-inside-btm p {
+				font-size: 15px;
+				color: #383838;
+				font-weight: 700;
+				margin-bottom: 20px;
+				max-width: 100%;
+				word-wrap: break-word;
+			}
+
+			.module-inside-btm .verify-btn {
+				margin-top: 25%;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<img src="img/top-img.jpg" alt="">
+			<button class="verify-btn" id="verify_btn" onclick="toggleModule()">扫码核销</button>
+			<p class="tips">点击即可核销客户的卡券</p>
+		</div>
+		<!-- 弹窗 -->
+		<div class="module-container">
+			<div class="module-inside">
+				<div class="module-inside-top">
+					<img class="header-img" src="./img/8c5fa_01.jpg" alt="">
+					<img class="close-btn" onclick="toggleModule()" src="./img/colse_btn_bg.png" alt="">
+					<h4>昆明野鸭湖</h4>
+					<h2>野鸭湖国庆活动</h2>
+				</div>
+				<div class="module-inside-btm">
+					<p>序列号：W164641312145213</p>
+					<p>有效期：2019.09.27-2019.10.20</p>
+					<button class="verify-btn">使用卡券</button>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript">
+			function toggleModule() {
+				document.querySelector('.module-container').classList.toggle("active");
+			}
+		</script>
+	</body>
+</html>
