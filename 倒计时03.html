@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<style type="text/css">
+			.act_item {
+				border-bottom: 1px solid #999999;
+				margin-bottom: 10px;
+				padding-bottom: 10px;
+			}
+
+			.act_item h4 {
+				margin: 30px 0 20px;
+			}
+
+			.time {
+				text-align: right;
+				font-size: 14px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="contianer">
+			<div v-for="(item,index) in list" :key="index" class="act_item">
+				<h4>{{ item.title }}</h4>
+				<div class="act_info">
+					<div class="time" v-if="item.djs=='结束'">结束</div>
+					<div class="time" v-else>剩余：{{ item.djs }}</div>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript" src="./js/vue.js"></script>
+		<script>
+			var app = new Vue({
+				el: ".contianer",
+				data: {
+					list: [],
+				},
+				mounted() {
+					var ssss = [{
+							"title": "小心愿，大梦想",
+							"count": "34",
+							"time": "1525753270350"
+						},
+						{
+							"title": "杭州国际时装周童模招募",
+							"count": "36",
+							"time": "1572600810000"
+						},
+						{
+							"title": "怪兽bobo全线代言火爆杭城的联名秀招募童模啦！",
+							"count": "74",
+							"time": "1572600812000"
+						},
+						{
+							"title": "汉风唐韵 、别",
+							"count": "266",
+							"time": "1572600910000"
+						},
+						{
+							"title": "听说你们想和明星超模同台“PK”？",
+							"count": "97",
+							"time": "1573600810000"
+						}
+					];
+					var _self = this;
+					ssss.map(function(obj, index) {
+						_self.$set(
+							obj, "djs", InitTime(obj.time)
+						);
+					})
+					_self.list = ssss;
+					setInterval(function() {
+						for (var key in _self.list) {
+							var aaa = parseInt(_self.list[key]["time"]);
+							var bbb = new Date().getTime();
+							var rightTime = aaa - bbb;
+							if (rightTime > 0) {
+								var dd = fmt(Math.floor(rightTime / 1000 / 60 / 60 / 24));
+								var hh = fmt(Math.floor((rightTime / 1000 / 60 / 60) % 24));
+								var mm = fmt(Math.floor((rightTime / 1000 / 60) % 60));
+								var ss = fmt(Math.floor((rightTime / 1000) % 60));
+								var current_time=dd + "天" + hh + "小时" + mm + "分" + ss + "秒";
+								_self.list[key]["djs"] = current_time;
+							}
+						}
+					}, 1000);
+				},
+			});
+
+			function InitTime(endtime) {
+				var dd, hh, mm, ss = null;
+				var time = parseInt(endtime) - new Date().getTime();
+				if (time <= 0) {
+					return '结束'
+				} else {
+					var dd = fmt(Math.floor(time / 1000 / 60 / 60 / 24));
+					var hh = fmt(Math.floor((time / 1000 / 60 / 60) % 24));
+					var mm = fmt(Math.floor((time / 1000 / 60) % 60));
+					var ss = fmt(Math.floor((time / 1000) % 60));
+					var str = dd + "天" + hh + "小时" + mm + "分" + ss + "秒";
+					return str;
+				}
+			}
+			// 补位
+			function fmt(n) {
+				if (n < 10) {
+					return '0' + n;
+				} else {
+					return n;
+				}
+			}
+		</script>
+	</body>
+</html>

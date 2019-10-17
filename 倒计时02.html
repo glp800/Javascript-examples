@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+	</head>
+	<body>
+		<div class="contianer">
+			<h1 id="#timer" v-for="(k,i) in list">{{k.remainTime}}</h1>
+		</div>
+		<script type="text/javascript" src="./js/vue.js"></script>
+		<script>
+			var app = new Vue({
+				el: ".contianer",
+				data: {
+					list: [ 
+						{
+							remainTime: 900000, // 距离结束还有多久
+							remainTimeStr: '' // 展示文案
+						},
+						{
+							remainTime: 400000,
+							remainTimeStr: ''
+						},
+						{
+							remainTime: 60500,
+							remainTimeStr: ''
+						},
+					]
+				},
+				methods: {
+
+				}
+			});
+		</script>
+	</body>
+</html>
