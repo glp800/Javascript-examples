@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<style type="text/css">
+			.mui-content>.mui-table-view:first-child {
+				margin-top: 0;
+			}
+
+			body {
+				background-color: #FFFFFF;
+			}
+
+			.mui-table-view-cell:after {
+				background-color: #f2f2f2;
+			}
+
+			.mui-table-view-cell:last-child:after {
+				height: 1px;
+			}
+
+			.mui-table-view:after {
+				height: 0;
+			}
+		</style>
+	</head>
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<h1 class="mui-title">好友</h1>
+		</header>
+		<div class="mui-content">
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell mui-media to-chat" v-for="(msg,idx) in list" :key="msg.id">
+					<a href="javascript:;">
+						<img class="mui-media-object mui-pull-left" :src="msg.head_img">
+						<div class="mui-media-body">
+							{{msg.name}}
+							<p class="mui-ellipsis">{{msg.last_msg}}</p>
+						</div>
+					</a>
+				</li>
+			</ul>
+		</div>
+		<script src="js/mui.min.js"></script>
+		<script src="js/msg.js"></script>
+		<script src="js/vue.min.js"></script>
+		<script type="text/javascript">
+			var app = new Vue({
+				el: '.mui-content',
+				data: {
+					lsit: list
+				},
+				mounted: function() {
+					mui.init();
+					mui.plusReady(function() {
+						plus.navigator.setStatusBarStyle("dark");
+						plus.navigator.setStatusBarBackground("#F7F7F7");
+					})
+					mui(".mui-content").on("tap", ".to-chat", function() {
+						mui.openWindow("./page/chat.html", "chat",{
+							waiting:{
+								autoShow:false
+							}
+						});
+					})
+				}
+			})
+		</script>
+	</body>
+</html>

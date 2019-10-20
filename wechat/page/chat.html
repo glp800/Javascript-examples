@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<style type="text/css">
+			body {
+				background-color: #FFFFFF;
+			}
+
+			.mui-content {
+				background-color: #FFFFFF;
+			}
+
+			ul,
+			li {
+				list-style: none;
+				margin: 0;
+				padding: 0;
+				width: 100%;
+			}
+
+			li {
+				background-color: #FFFFFF;
+				padding: 10px;
+				box-sizing: border-box;
+				margin-bottom: 10px;
+				background-color: #F2F2F2;
+			}
+			li:nth-of-type(odd){
+				max-width: 90%;
+				float: right; 
+				border-top-left-radius: 5px;
+				border-bottom-left-radius: 5px;
+			}
+			li:nth-of-type(even){
+				max-width: 90%;
+				float: left;
+				border-top-right-radius: 5px;
+				border-bottom-right-radius: 5px;
+			}
+			.mui-bar-nav~.mui-content {
+				padding-bottom: 50px;
+			}
+
+			.bottom-bar {
+				display: flex;
+				align-items: center;
+				position: fixed;
+				bottom: 0;
+				width: 100%;
+				z-index: 1045;
+				background-color: #f9f9f9;
+				padding: 5px;
+				min-height: 50px;
+				overflow: hidden;
+				box-shadow: 0 0 0.5px 0 rgba(0, 0, 0, 0.6);
+			}
+
+			.bottom-bar textarea {
+				margin-bottom: 0;
+				margin-right: 5px;
+				color: #999999;
+				padding: 2px;
+				max-height: 90px;
+				background-color: #FFFFFF;
+				border: none;
+				height: 40px;
+			}
+
+			.msg-container {
+				position: absolute;
+				width: 100%;
+				top: 44px;
+				bottom: 0;
+				padding-bottom: 50px;
+				overflow: hidden;
+				overflow-y: scroll;
+			}
+
+			#msg_list {
+				display: block;
+			}
+
+			.clear-btn {
+				margin: 0 5px;
+				background-color: #ff0000;
+			}
+
+			.mui-badge-danger {
+				border: none;
+			}
+
+			.mui-badge-danger:enabled:active {
+				background-color: ##cc2c2;
+			}
+
+			.v-cloak {
+				display: none;
+			}
+		</style>
+
+	</head>
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<span class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></span>
+			<h1 class="mui-title">chat</h1>
+		</header>
+		<div class="mui-content" id="mui_content" v-cloak>
+			<div class="msg-container" id="msg_list">
+				<ul>
+					<li v-for="(m,i) in list" :key="i+m">第{{i+1}}条消息：{{m}}</li>
+				</ul>
+			</div>
+			<div class="bottom-bar">
+				<textarea type="text" v-model="msg"></textarea>
+				<!-- <button type="button" class="mui-btn mui-badge-danger clear-btn" @tap="msg=''">X</button> -->
+				<button type="button" class="mui-btn mui-btn-blue" @tap="sendMsg" id="customModelItemMatch">发送</button>
+			</div>
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+		<script type="text/javascript" charset="utf-8">
+			mui.init();
+			var app = new Vue({
+				el: "#mui_content",
+				data: {
+					list: [
+						"这是消息01", "这是消息02", "这是消息03", "这是消息04", "这是消息05", "这是消息06", "这是消息07", "这是消息08", "这是消息09", "这是消息10",
+						"这是消息11", "这是消息12", "这是消息13", "这是消息14", "这是消息15", "这是消息16", "这是消息17", "这是消息18", "这是消息19", "这是消息20",
+					],
+					num: 20,
+					msg: "这是新增的消息。",
+					new_msg: ["这是消息81", "这是消息82", "这是消息83", "这是消息84", "这是消息85", "这是消息86", "这是消息87", "这是消息88", ]
+				},
+				methods: {
+					sendMsg: function() {
+						if (this.msg == '') {
+							mui.toast("消息不能为空！");
+							return false;
+						}
+						this.list.push(this.msg);
+						this.msg = '';
+						this.$nextTick(function() {
+							var lists = document.getElementById("msg_list");
+							lists.scrollTop = lists.scrollHeight;
+						});
+					}
+				},
+				mounted: function() {
+					var _self = this;
+					var lists = document.getElementById("msg_list");
+					var lsh = lists.scrollHeight;
+					lists.scrollTop = lsh;
+					lists.addEventListener('scroll', function(e) {
+						if (lists.scrollTop <= 0) {
+							// for (var i = 0; i < app.new_msg.length; i++) {
+							// 	app.list.unshift(app.new_msg[i]);
+							// }
+						}
+					})
+				}
+			})
+			//防止自动关闭键盘
+			mui(".mui-content").on("tap", ".mui-btn", function(e) {
+				if (e && e.preventDefault)
+					e.preventDefault();
+				//IE阻止默认事件
+				else
+					window.event.returnValue = false;
+				return false;
+			})
+		</script>
+	</body>
+</html>
