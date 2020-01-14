@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="style.css">
+    <title>vue cdn</title>
+</head>
+
+<body>
+    <h1>Axios请求</h1>
+    <div id="vue-app">
+        <form class="" @submit.prevent="onSubmit">
+            <input type="text" v-model="todo.title">
+            <input type="checkbox" v-model="todo.completed">
+            <input type="submit" value="提交">
+        </form>
+        <ul>
+            <li v-for="(todo,i) in todos" :key="i">
+                <p>{{todo.title}}</p>
+                <p v-if="todo.completed">{{todo.completed}}</p>
+            </li>
+        </ul>
+    </div>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>
