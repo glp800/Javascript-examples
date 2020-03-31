@@ -14,6 +14,7 @@ app.get('/', function (req, res) {
         user: 'Johnny'
     }])
 })
+
 app.get('/products', function (req, res) {
     res.send([{
         title: 'product A',
@@ -29,6 +30,7 @@ app.get('/products', function (req, res) {
         id: 4
     }])
 })
+
 app.listen(3000, () => {
     console.log("App listening on port 3000!")
 })
