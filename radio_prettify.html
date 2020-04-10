@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        html {
+            box-sizing: border-box;
+            height: 100%;
+        }
+
+        ::after,
+        ::before {
+            box-sizing: inherit;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-size: 14px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #ebecf0;
+        }
+
+        .radio-group {
+            position: relative;
+            padding: 48px 64px;
+            border-radius: 16px;
+            background-color: #ebecf0;
+            box-shadow: inset 4px 4px 4px #d1d0e6, inset -4px -4px 4px #ffffff;
+        }
+
+        .wrapper {
+            margin: 8px 0;
+        }
+
+        .state {
+            opacity: 0;
+            position: absolute;
+        }
+
+        .label {
+            display: inline-flex;
+            transition: all 0.2s ease-in-out;
+            align-items: center;
+        }
+
+        .text {
+            text-shadow: 1px 1px 1px #ffffff;
+            transition: all 0.2s ease-in-out;
+            opacity: 0.6;
+            margin-left: 8px;
+        }
+
+        .indicator {
+            position: relative;
+            border-radius: 50%;
+            height: 30px;
+            width: 30px;
+            overflow: hidden;
+            box-shadow: -8px -4px 8px #ffffff, 8px 4px 8px #d1d0e6;
+        }
+
+        .indicator::after,
+        .indicator::before {
+            position: absolute;
+            content: "";
+            height: 80%;
+            width: 80%;
+            border-radius: 50%;
+            top: 10%;
+            left: 10%;
+        }
+
+        .indicator::after {
+            background-color: #ebecf0;
+            box-shadow: -4px -2px 4px #ffffff, 4px 2px 4px #d1d0e6;
+            transform: scale3d(1,1,1);
+            transition: all ease-in-out 0.2s;
+        }
+
+        .indicator::before {
+            box-shadow: -4px -2px 4px #d1d0e6, 4px 2px 4px #ffffff;
+        }
+
+        .state:checked~.label .indicator::after {
+            opacity: 0;
+            transform: scale3d(.9, .9, 1);
+        }
+
+        .state:checked~label .text {
+            transform: translateX(8px);
+            opacity: 1;
+        }
+
+        .label:hover .text {
+            opacity: 1;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="radio-group">
+        <div class="wrapper">
+            <input type="radio" name="app" class="state" id="a"></input>
+            <label for="a" class="label">
+                <div class="indicator"></div>
+                <span class="text">点赞</span>
+            </label>
+        </div>
+        <div class="wrapper">
+            <input type="radio" name="app" class="state" id="b"></input>
+            <label for="b" class="label">
+                <div class="indicator"></div>
+                <span class="text">投币</span>
+            </label>
+        </div>
+        <div class="wrapper">
+            <input type="radio" name="app" class="state" id="c"></input>
+            <label for="c" class="label">
+                <div class="indicator"></div>
+                <span class="text">关注</span>
+            </label>
+        </div>
+    </div>
+</body>
+
+</html>
