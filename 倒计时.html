@@ -6,9 +6,9 @@
 		<title></title>
 	</head>
 	<body>
-		<h1 id="#timer"></h1>
+		<h1 id="timer"></h1>
 		<script>
-			var endtimer="2019-10-17 9:15";
+			var endtimer="2020-04-13 12:15";
 			function clock() {
 				var today = new Date(); //当前时间
 				var stopTime = new Date(endtimer);//结束时间
@@ -23,8 +23,8 @@
 					1000);
 				if (shengyuH > 0 || shengyuM > 0 || S > 0) {
 					setTimeout(clock, 500);
-					document.getElementById("#timer").innerText=(shengyuD + "天" + shengyuH + "小时" + shengyuM + "分" + S + "秒" + " ")
-				} else {
+					document.getElementById("timer").innerText=(shengyuD + "天" + shengyuH + "小时" + shengyuM + "分" + S + "秒" + " ")
+				} else { 
 					// 倒计时结束
 					document.getElementById("timer").innerText=("倒计时结束");
 				}
