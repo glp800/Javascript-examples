@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>canvas1</title>
+    <style type="text/css">
+        body {
+            text-align: center;
+            padding-top: 20px;
+        }
+
+        canvas {
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            margin: 0 auto;
+        }
+    </style>
+</head>
+
+<body onload="draw()">
+    <canvas id="canvas" width="800" height="600">
+        你的浏览器不支持canvas，请更新！
+    </canvas>
+</body>
+<script>
+    function draw() {
+        var canvas = document.getElementById('canvas');
+        if (canvas.getContext) {
+            // 获取2d上下文
+            var ctx = canvas.getContext('2d')
+            /***
+             * 绘制一个填充矩形
+             * fillRect(x,y,width,height)
+             * 绘制一个描边矩形
+             * strokeRect(x,y,width,height)
+             * 
+             * 清除指定矩形区域
+             * clearRect(x,y,width,height)
+             * ***/
+            ctx.fillRect(25,25,100,100);
+            ctx.clearRect(45,45,60,60);
+            ctx.strokeRect(50,50,50,50);
+            /**
+             * 以上方法用于绘制矩形
+             * 
+             * 通过路径绘制图形
+             * **/
+        } 
+    }
+</script>
+
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>canvas1</title>
+    <style type="text/css">
+        body {
+            text-align: center;
+            padding-top: 20px;
+        }
+
+        canvas {
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            margin: 0 auto;
+        }
+    </style>
+</head>
+
+<body onload="draw()">
+    <canvas id="canvas" width="800" height="600">
+        你的浏览器不支持canvas，请更新！
+    </canvas>
+</body>
+<script>
+    function draw() {
+        var canvas = document.getElementById('canvas');
+        if (canvas.getContext) {
+            // 获取2d上下文
+            var ctx = canvas.getContext('2d')
+            /*
+             * 以上方法用于绘制矩形
+             *
+             * 通过路径绘制图形
+             * 1.创建起始点
+             * 2.画出路径
+             * 3.闭合路径
+             * 4.通过描边或者填充绘制图形
+             */
+            // 填充三角形
+            ctx.beginPath();
+            ctx.moveTo(25, 25);
+            ctx.lineTo(105, 25);
+            ctx.lineTo(25, 105);
+            ctx.fill();
+
+            // 闭合
+            ctx.beginPath();
+            // 创建起点
+            ctx.moveTo(125, 125);
+            ctx.lineTo(125, 45);
+            ctx.lineTo(45, 125);
+            ctx.closePath();
+            ctx.storke();
+        }
+    }
+</script>
+
+</html>
