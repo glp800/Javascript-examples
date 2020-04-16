@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>canvas1</title>
+    <style type="text/css">
+        body {
+            text-align: center;
+            padding-top: 20px;
+        }
+
+        canvas {
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            margin: 0 auto;
+        }
+    </style>
+</head>
+
+<body onload="draw()">
+    <canvas id="canvas" width="800" height="600">
+        你的浏览器不支持canvas，请更新！
+    </canvas>
+</body>
+<script>
+    function draw() {
+        var canvas = document.getElementById('canvas');
+        if (canvas.getContext) {
+            // 获取2d上下文
+            var ctx = canvas.getContext('2d')
+
+            // 圆的组成：圆心(x,y) 半径 开始角度 结束角度 顺时针/逆时针
+            ctx.strokeStyle = 'orange';
+            // ctx.fillStyle = 'orange';
+            // 画笔宽度
+            ctx.lineWidth = 2;
+            // 画笑脸
+            ctx.beginPath();
+            ctx.arc(75, 75, 50, 0, Math.PI * 2, true);
+            //下一笔从哪开始
+            ctx.moveTo(100, 100);
+            ctx.arc(75, 75, 35, 0.25 * Math.PI, Math.PI / 1.3, false);
+            ctx.moveTo(65, 65);
+            ctx.arc(60, 65, 5, 0, Math.PI * 2, true);
+            ctx.moveTo(95, 65);
+            ctx.arc(90, 65, 5, 0, Math.PI * 2, true);
+            ctx.stroke();
+        }
+    }
+</script>
+
+</html>
