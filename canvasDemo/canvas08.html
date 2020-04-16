@@ -29,29 +29,22 @@
         if (canvas.getContext) {
             // 获取2d上下文
             var ctx = canvas.getContext('2d')
-            /*
-             * 以上方法用于绘制矩形
-             *
-             * 通过路径绘制图形
-             * 1.创建起始点
-             * 2.画出路径
-             * 3.闭合路径
-             * 4.通过描边或者填充绘制图形
-             */
-            // 填充三角形
-            ctx.beginPath();
-            ctx.moveTo(25, 25);
-            ctx.lineTo(105, 25);
-            ctx.lineTo(25, 105);
-            ctx.fill();
 
-            // 闭合
+            // 圆的组成：圆心(x,y) 半径 开始角度 结束角度 顺时针/逆时针
+            ctx.strokeStyle = 'orange';
+            // ctx.fillStyle = 'orange';
+            // 画笔宽度
+            ctx.lineWidth = 2;
+            // 画笑脸
             ctx.beginPath();
-            // 创建起点
-            ctx.moveTo(125, 125);
-            ctx.lineTo(125, 45);
-            ctx.lineTo(45, 125);
-            ctx.closePath();
+            ctx.arc(75, 75, 50, 0, Math.PI * 2, true);
+            //下一笔从哪开始
+            ctx.moveTo(100, 100);
+            ctx.arc(75, 75, 35, 0.25 * Math.PI, Math.PI / 1.3, false);
+            ctx.moveTo(65, 65);
+            ctx.arc(60, 65, 5, 0, Math.PI * 2, true);
+            ctx.moveTo(95, 65);
+            ctx.arc(90, 65, 5, 0, Math.PI * 2, true);
             ctx.stroke();
         }
     }
