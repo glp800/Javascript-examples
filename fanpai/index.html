@@ -139,6 +139,7 @@
 			var _this;
 			var cutdown = null;
 			var timout = null;
+			var insidetimout = null;
 			var app = new Vue({
 				el: "#main_container",
 				data() {
@@ -204,7 +205,8 @@
 						cutdown: 10,
 						isShow: false,
 						currentId: '',
-						erritem: ''
+						erritem: 0,
+						errNum:0
 					}
 				},
 				created: function() {
@@ -232,11 +234,19 @@
 								_this.currentId = '';
 								_this.chooseId.push(_id);
 							} else {
+								_this.errNum+=1;
 								_this.erritem = _id;
+								if(_this.errNum>3){
+									alert("点错超过三次，游戏结束！！！");
+									_this.erritem = 0;
+									_this.isStart=false;
+									_this.chooseId=[];
+								}
 							}
 						}
 					},
 					startGame: function() {
+						_this.erritem = 0;
 						_this.isShow = true;
 						_this.isStart = false;
 						clearInterval(cutdown);
@@ -252,7 +262,8 @@
 							for (let i in _this.card) {
 								_this.chooseId.push(_this.card[i].id)
 							}
-							setTimeout(function() {
+							clearTimeout(insidetimout)
+							insidetimout=setTimeout(function() {
 								app.chooseId = [];
 								_this.isStart = true;
 								_this.isShow = false;
