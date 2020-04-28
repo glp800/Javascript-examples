@@ -2,11 +2,12 @@
 <html lang="zh">
 	<head>
 		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<meta http-equiv="X-UA-Compatible" content="ie=edge">
-		<!-- <link rel="stylesheet" href="css/style.css" /> -->
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
 		<title>Tarot</title>
-		<link href="css/animate.min.css" rel="stylesheet">
+		<!-- <link href="css/animate.min.css" rel="stylesheet"> -->
+		<link href="https://cdn.bootcdn.net/ajax/libs/animate.css/3.7.2/animate.min.css" rel="stylesheet">
 		<style type="text/css">
 			[v-cloak] {
 				display: none;
@@ -29,15 +30,15 @@
 				align-items: center;
 				justify-content: center;
 				flex-wrap: wrap;
-				max-width: 1260px;
+				max-width: 1200px;
 				margin: 0 auto;
 			}
 
 			.card {
 				position: relative;
-				height: 260px;
-				width: 180px;
-				margin: 10px 10px;
+				height: 2.6rem;
+				width: 1.7rem;
+				margin: 0.1rem 0.1rem;
 			}
 
 			.card .card-side-front img {
@@ -113,6 +114,26 @@
 				justify-content: center;
 				padding: 20px 0;
 			}
+
+			@media only screen and (max-width: 750px) {
+				.option-bar {
+					padding: 5px 0;
+				}
+
+				.card-container {
+					width: 100%;
+					justify-content: space-between;
+					padding: 0 5px 20px;
+					box-sizing: border-box;
+				}
+
+				.card {
+					position: relative;
+					height: 180px;
+					width: 30%;
+					margin: 0 2px 10px;
+				}
+			}
 		</style>
 	</head>
 	<body>
@@ -134,7 +155,8 @@
 				</div>
 			</div>
 		</div>
-		<script src="js/vue.js"></script>
+		<!-- <script src="js/vue.js"></script> -->
+		<script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.11/vue.min.js"></script>
 		<script type="text/javascript">
 			var _this;
 			var cutdown = null;
@@ -205,8 +227,8 @@
 						cutdown: 10,
 						isShow: false,
 						currentId: '',
-						erritem: 0,
-						errNum:0
+						erritem: '',
+						errNum: 0
 					}
 				},
 				created: function() {
@@ -231,21 +253,25 @@
 								_this.currentId = _id;
 								_this.chooseId.push(_id);
 							} else if (_this.currentId == _id.replace("a", "") || _this.currentId == _id + 'a') {
+								_this.errNum = 0;
 								_this.currentId = '';
 								_this.chooseId.push(_id);
 							} else {
-								_this.errNum+=1;
+								_this.errNum += 1;
 								_this.erritem = _id;
-								if(_this.errNum>3){
+								if (_this.errNum > 3) {
 									alert("点错超过三次，游戏结束！！！");
-									_this.erritem = 0;
-									_this.isStart=false;
-									_this.chooseId=[];
+									_this.errNum = 0;
+									_this.erritem = '';
+									_this.currentId = '';
+									_this.isStart = false;
+									_this.chooseId = [];
 								}
 							}
 						}
 					},
 					startGame: function() {
+						var oldtime=_this.cutdown;
 						_this.erritem = 0;
 						_this.isShow = true;
 						_this.isStart = false;
@@ -263,13 +289,13 @@
 								_this.chooseId.push(_this.card[i].id)
 							}
 							clearTimeout(insidetimout)
-							insidetimout=setTimeout(function() {
+							insidetimout = setTimeout(function() {
 								app.chooseId = [];
 								_this.isStart = true;
 								_this.isShow = false;
-								_this.cutdown = 10;
+								_this.cutdown = oldtime;
 								clearInterval(cutdown);
-							}, 10000)
+							}, oldtime*1000)
 						}, 200)
 					},
 					peep: function() {
@@ -286,6 +312,28 @@
 							_this.clickNum++;
 						}, 1200)
 					}
+				},
+				mounted: function() {
+					var html = document.getElementsByTagName("html")[0];
+
+					function getFontSize() {
+						var width = window.screen.width || document.documentElement.clientWidth;
+						if (width < 750) {
+							_this.cutdown=6;
+							_this.card = _this.card.splice(0, 12);
+						}
+						if (width > 1260) {
+							width = 1260;
+						}
+						return (100 / 1260) * width;
+					}
+					html.style.fontSize = getFontSize() + "px";
+					window.onresize = function() {
+						console.log("onresize")
+						setTimeout(function() {
+							html.style.fontSize = getFontSize() + "px";
+						}, 100);
+					};
 				}
 			})
 		</script>
