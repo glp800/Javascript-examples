@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<div class="content"></div>
+		<script type="text/javascript" src="./js/vue.js"></script>
+		<script>
+			var app = new Vue({
+				el: ".content",
+				data() {
+					return {
+						obj: {},
+						obj1: {
+							title: '名字',
+							arr: ['hh', 'kk', 'loser'],
+						},
+						obj2: {
+							age: '29',
+							hobby: [{
+								title: 'game',
+								id: '123'
+							}, {
+								title: 'basketball',
+								id: '689'
+							}],
+						}
+					}
+				},
+				mounted: function() {
+					var _this = this;
+					var obj = {};
+					var obj1 = {
+						title: '名字',
+						arr: ['hh', 'kk', 'loser'],
+					};
+					var obj2 = {
+						age: '29',
+						hobby: [{
+							title: 'game',
+							id: '123'
+						}, {
+							title: 'basketball',
+							id: '689'
+						}]
+					}
+					for (var i in obj1) {
+						obj[i] = obj1[i]
+					}
+					for (var j in obj2) {
+						obj[j] = obj2[j]
+					}
+					obj.age = 56;
+					console.log(obj)
+					console.log(obj2.age)
+				}
+			})
+		</script>
+	</body>
+</html>

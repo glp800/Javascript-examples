@@ -1,293 +1,353 @@
 <!DOCTYPE html>
 <html lang="zh">
-	<head>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<meta http-equiv="X-UA-Compatible" content="ie=edge">
-		<!-- <link rel="stylesheet" href="css/style.css" /> -->
-		<title>Tarot</title>
-		<link href="css/animate.min.css" rel="stylesheet">
-		<style type="text/css">
-			[v-cloak] {
-				display: none;
-			}
 
-			body {
-				-webkit-user-select: none;
-				-moz-user-select: none;
-				-ms-user-select: none;
-				user-select: none;
-				background-color: #000;
-				height: 100%;
-				width: 100%;
-				margin: 0;
-				padding: 0;
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<title>Tarot</title>
+	<!-- <link href="css/animate.min.css" rel="stylesheet"> -->
+	<link href="https://cdn.bootcdn.net/ajax/libs/animate.css/3.7.2/animate.min.css" rel="stylesheet">
+	<style type="text/css">
+		[v-cloak] {
+			display: none;
+		}
+
+		body {
+			-webkit-user-select: none;
+			-moz-user-select: none;
+			-ms-user-select: none;
+			user-select: none;
+			background-color: #000;
+			height: 100%;
+			width: 100%;
+			margin: 0;
+			padding: 0;
+		}
+
+		.card-container {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			flex-wrap: wrap;
+			max-width: 1200px;
+			margin: 0 auto;
+		}
+
+		.card {
+			position: relative;
+			height: 2.6rem;
+			width: 1.7rem;
+			margin: 0.1rem 0.1rem;
+		}
+
+		.card .card-side-front img {
+			width: 100%;
+			height: 100%;
+		}
+
+		.card-side {
+			width: 100%;
+			height: 100%;
+			position: absolute;
+			-webkit-transition: all 0.6s ease-in-out;
+			transition: all 0.6s ease-in-out;
+			-webkit-backface-visibility: hidden;
+			backface-visibility: hidden;
+			border-radius: 8px;
+			font-size: 0;
+			line-height: 0;
+			border: 2px double #dcb48f;
+			overflow: hidden;
+			-webkit-box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.15);
+			box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.15);
+			background-color: #FFFFFF;
+		}
+
+		.card-side-back {
+			-webkit-transform: rotateY(180deg);
+			transform: rotateY(180deg);
+		}
+
+		.card-side-back img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+		}
+
+		.card.active .card-side-front {
+			-webkit-transform: rotateY(-180deg);
+			transform: rotateY(-180deg);
+		}
+
+		.card.active .card-side-back {
+			-webkit-transform: rotateY(0);
+			transform: rotateY(0);
+		}
+
+		#main_container {
+			width: 100%;
+			height: 100%;
+		}
+
+		.cutdown {
+			font-size: 72px;
+			font-weight: 900;
+			color: #FF0000;
+			position: fixed;
+			width: 100%;
+			height: 100%;
+			z-index: 10;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			-webkit-animation-iteration-count: 10;
+			-webkit-animation-delay: 1s;
+			animation-delay: 1s;
+			animation-iteration-count: 10;
+			text-shadow: 2px 3px rgba(0, 0, 0, .6), 3px 4px rgba(0, 0, 0, .6), 4px 5px rgba(0, 0, 0, .6);
+		}
+
+		.option-bar {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			padding: 20px 0;
+		}
+
+		canvas {
+			display: block;
+		}
+
+		@media only screen and (max-width: 750px) {
+			.option-bar {
+				padding: 5px 0;
 			}
 
 			.card-container {
-				display: flex;
-				align-items: center;
-				justify-content: center;
-				flex-wrap: wrap;
-				max-width: 1260px;
-				margin: 0 auto;
+				width: 100%;
+				justify-content: space-between;
+				padding: 0 5px 20px;
+				box-sizing: border-box;
 			}
 
 			.card {
 				position: relative;
-				height: 260px;
-				width: 180px;
-				margin: 10px 10px;
+				height: 180px;
+				width: 30%;
+				margin: 0 2px 10px;
 			}
+		}
+	</style>
+</head>
 
-			.card .card-side-front img {
-				width: 100%;
-				height: 100%;
-			}
-
-			.card-side {
-				width: 100%;
-				height: 100%;
-				position: absolute;
-				-webkit-transition: all 0.6s ease-in-out;
-				transition: all 0.6s ease-in-out;
-				-webkit-backface-visibility: hidden;
-				backface-visibility: hidden;
-				border-radius: 8px;
-				font-size: 0;
-				line-height: 0;
-				border: 2px double #dcb48f;
-				overflow: hidden;
-				-webkit-box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.15);
-				box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.15);
-				background-color: #FFFFFF;
-			}
-
-			.card-side-back {
-				-webkit-transform: rotateY(180deg);
-				transform: rotateY(180deg);
-			}
-
-			.card-side-back img {
-				width: 100%;
-				height: 100%;
-				object-fit: cover;
-			}
-
-			.card.active .card-side-front {
-				-webkit-transform: rotateY(-180deg);
-				transform: rotateY(-180deg);
-			}
-
-			.card.active .card-side-back {
-				-webkit-transform: rotateY(0);
-				transform: rotateY(0);
-			}
-
-			#main_container {
-				width: 100%;
-				height: 100%;
-			}
-
-			.cutdown {
-				font-size: 72px;
-				font-weight: 900;
-				color: #FF0000;
-				position: fixed;
-				width: 100%;
-				height: 100%;
-				z-index: 10;
-				display: flex;
-				align-items: center;
-				justify-content: center;
-				-webkit-animation-iteration-count: 10;
-				-webkit-animation-delay: 1s;
-				animation-delay: 1s;
-				animation-iteration-count: 10;
-				text-shadow: 2px 3px rgba(0, 0, 0, .6), 3px 4px rgba(0, 0, 0, .6), 4px 5px rgba(0, 0, 0, .6);
-			}
-
-			.option-bar {
-				display: flex;
-				align-items: center;
-				justify-content: center;
-				padding: 20px 0;
-			}
-		</style>
-	</head>
-	<body>
-		<div class="row" id="main_container" v-cloak>
-			<div class="animated cutdown" v-if="isShow" :class="isShow?'bounceInDown':''">{{cutdown}}</div>
-			<div class="option-bar">
-				<button type="button" @click="startGame">开始</button>
-				<button type="button" @click="peep" v-if="isStart">偷看</button>
-			</div>
-			<!--翻纸牌效果  -->
-			<div class="card-container">
-				<div class="card" :class="setClass(c.id)" @click="chooseCls(c.id)" v-for="(c,i) in card" :key="i">
-					<div class="card-side card-side-front animated" :class="c.id==erritem?'shake':''">
-						<img src="img/back-img.jpg">
-					</div>
-					<div class="card-side card-side-back">
-						<img :src="c.img">
-					</div>
+<body>
+	<div class="row" id="main_container" v-cloak>
+		<div class="animated cutdown" v-if="isShow" :class="isShow?'bounceInDown':''">{{cutdown}}</div>
+		<div class="option-bar">
+			<button type="button" @click="startGame">开始</button>
+			<button type="button" @click="peep" v-if="isStart">偷看</button>
+		</div>
+		<!--翻纸牌效果  -->
+		<div class="card-container">
+			<div class="card" :class="setClass(c.id)" @click="chooseCls(c.id)" v-for="(c,i) in card" :key="i">
+				<div class="card-side card-side-front animated" :class="c.id==erritem?'shake':''">
+					<img src="img/back-img.jpg">
+				</div>
+				<div class="card-side card-side-back">
+					<img :src="c.img">
 				</div>
 			</div>
 		</div>
-		<script src="js/vue.js"></script>
-		<script type="text/javascript">
-			var _this;
-			var cutdown = null;
-			var timout = null;
-			var insidetimout = null;
-			var app = new Vue({
-				el: "#main_container",
-				data() {
-					return {
-						card: [{
-							img: "./img/1.jpg",
-							id: "1a"
-						}, {
-							img: "./img/1.jpg",
-							id: '1'
-						}, {
-							img: "./img/2.jpg",
-							id: '2a'
-						}, {
-							img: "./img/2.jpg",
-							id: "2"
-						}, {
-							img: "./img/3.jpg",
-							id: "3a"
-						}, {
-							img: "./img/3.jpg",
-							id: "3"
-						}, {
-							img: "./img/4.jpg",
-							id: "4a"
-						}, {
-							img: "./img/4.jpg",
-							id: "4"
-						}, {
-							img: "./img/5.jpg",
-							id: "5a"
-						}, {
-							img: "./img/5.jpg",
-							id: "5"
-						}, {
-							img: "./img/6.jpg",
-							id: "6a"
-						}, {
-							img: "./img/6.jpg",
-							id: "6"
-						}, {
-							img: "./img/7.jpg",
-							id: "7a"
-						}, {
-							img: "./img/7.jpg",
-							id: "7"
-						}, {
-							img: "./img/8.jpg",
-							id: "8a"
-						}, {
-							img: "./img/8.jpg",
-							id: "8"
-						}, {
-							img: "./img/9.jpg",
-							id: "9a"
-						}, {
-							img: "./img/9.jpg",
-							id: "9"
-						}],
-						chooseId: [],
-						clickNum: 0,
-						isStart: false,
-						cutdown: 10,
-						isShow: false,
-						currentId: '',
-						erritem: 0,
-						errNum:0
+		<canvas id="canvas"></canvas>
+	</div>
+	<!-- <script src="js/vue.js"></script> -->
+	<script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.11/vue.min.js"></script>
+	<script type="text/javascript">
+		var _this;
+		var cutdown = null;
+		var timout = null;
+		var insidetimout = null;
+		var app = new Vue({
+			el: "#main_container",
+			data() {
+				return {
+					card: [{
+						img: "./img/1.jpg",
+						id: "1a"
+					}, {
+						img: "./img/1.jpg",
+						id: '1'
+					}, {
+						img: "./img/2.jpg",
+						id: '2a'
+					}, {
+						img: "./img/2.jpg",
+						id: "2"
+					}, {
+						img: "./img/3.jpg",
+						id: "3a"
+					}, {
+						img: "./img/3.jpg",
+						id: "3"
+					}, {
+						img: "./img/4.jpg",
+						id: "4a"
+					}, {
+						img: "./img/4.jpg",
+						id: "4"
+					}, {
+						img: "./img/5.jpg",
+						id: "5a"
+					}, {
+						img: "./img/5.jpg",
+						id: "5"
+					}, {
+						img: "./img/6.jpg",
+						id: "6a"
+					}, {
+						img: "./img/6.jpg",
+						id: "6"
+					}, {
+						img: "./img/7.jpg",
+						id: "7a"
+					}, {
+						img: "./img/7.jpg",
+						id: "7"
+					}, {
+						img: "./img/8.jpg",
+						id: "8a"
+					}, {
+						img: "./img/8.jpg",
+						id: "8"
+					}, {
+						img: "./img/9.jpg",
+						id: "9a"
+					}, {
+						img: "./img/9.jpg",
+						id: "9"
+					}],
+					chooseId: [],
+					clickNum: 0,
+					isStart: false,
+					cutdown: 10,
+					isShow: false,
+					currentId: '',
+					erritem: '',
+					errNum: 0
+				}
+			},
+			created: function () {
+				_this = this;
+			},
+			methods: {
+				setClass: function (_id) {
+					if (_this.chooseId.indexOf(_id) != -1) {
+						return 'active';
+					} else {
+						return '';
 					}
 				},
-				created: function() {
-					_this = this;
-				},
-				methods: {
-					setClass: function(_id) {
-						if (_this.chooseId.indexOf(_id) != -1) {
-							return 'active';
+				chooseCls: function (_id, e) {
+					if (!_this.isStart) {
+						alert("还没开始游戏，不允许偷看！！！")
+						return;
+					}
+					var index = this.chooseId.indexOf(_id);
+					if (index == -1) {
+						if (_this.currentId == '') {
+							_this.currentId = _id;
+							_this.chooseId.push(_id);
+						} else if (_this.currentId == _id.replace("a", "") || _this.currentId == _id + 'a') {
+							_this.errNum = 0;
+							_this.currentId = '';
+							_this.chooseId.push(_id);
 						} else {
-							return '';
-						}
-					},
-					chooseCls: function(_id, e) {
-						if (!_this.isStart) {
-							alert("还没开始游戏，不允许偷看！！！")
-							return;
-						}
-						var index = this.chooseId.indexOf(_id);
-						if (index == -1) {
-							if (_this.currentId == '') {
-								_this.currentId = _id;
-								_this.chooseId.push(_id);
-							} else if (_this.currentId == _id.replace("a", "") || _this.currentId == _id + 'a') {
+							_this.errNum += 1;
+							_this.erritem = _id;
+							if (_this.errNum > 3) {
+								alert("点错超过三次，游戏结束！！！");
+								_this.errNum = 0;
+								_this.erritem = '';
 								_this.currentId = '';
-								_this.chooseId.push(_id);
-							} else {
-								_this.errNum+=1;
-								_this.erritem = _id;
-								if(_this.errNum>3){
-									alert("点错超过三次，游戏结束！！！");
-									_this.erritem = 0;
-									_this.isStart=false;
-									_this.chooseId=[];
-								}
+								_this.isStart = false;
+								_this.chooseId = [];
 							}
 						}
-					},
-					startGame: function() {
-						_this.erritem = 0;
-						_this.isShow = true;
-						_this.isStart = false;
-						clearInterval(cutdown);
-						cutdown = setInterval(function() {
-							_this.cutdown--;
-						}, 1000)
-						var randomNumber = function() {
-							return 0.5 - Math.random()
-						}
-						_this.card.sort(randomNumber);
-						clearTimeout(timout)
-						timout = setTimeout(function() {
-							for (let i in _this.card) {
-								_this.chooseId.push(_this.card[i].id)
-							}
-							clearTimeout(insidetimout)
-							insidetimout=setTimeout(function() {
-								app.chooseId = [];
-								_this.isStart = true;
-								_this.isShow = false;
-								_this.cutdown = 10;
-								clearInterval(cutdown);
-							}, 10000)
-						}, 200)
-					},
-					peep: function() {
-						if (_this.clickNum >= 3) {
-							alert("最多只能偷看3次哟！！！")
-							return;
-						}
-						arr = JSON.parse(JSON.stringify(_this.chooseId));
+					}
+				},
+				startGame: function () {
+					const oldtime = _this.cutdown;
+					_this.chooseId = [];
+					_this.errNum = 0;
+					_this.clickNum=0;
+					_this.erritem = '';
+					_this.isShow = true;
+					_this.isStart = false;
+					clearInterval(cutdown);
+					cutdown = setInterval(function () {
+						_this.cutdown--;
+					}, 1000)
+					var randomNumber = function () {
+						return 0.5 - Math.random()
+					}
+					_this.card.sort(randomNumber);
+					clearTimeout(timout)
+					timout = setTimeout(function () {
 						for (let i in _this.card) {
 							_this.chooseId.push(_this.card[i].id)
 						}
-						setTimeout(function() {
-							app.chooseId = arr;
-							_this.clickNum++;
-						}, 1200)
+						clearTimeout(insidetimout)
+						insidetimout = setTimeout(function () {
+							app.chooseId = [];
+							_this.isStart = true;
+							_this.isShow = false;
+							_this.cutdown = oldtime;
+							clearInterval(cutdown);
+						}, oldtime * 1000)
+					}, 200)
+				},
+				peep: function () {
+					if (_this.clickNum >= 2) {
+						alert("最多只能偷看2次哟！！！")
+						return;
 					}
+					arr = JSON.parse(JSON.stringify(_this.chooseId));
+					for (let i in _this.card) {
+						_this.chooseId.push(_this.card[i].id)
+					}
+					setTimeout(function () {
+						app.chooseId = arr;
+						_this.clickNum++;
+					}, 1000)
 				}
-			})
-		</script>
-	</body>
+			},
+			mounted: function () {
+				var html = document.getElementsByTagName("html")[0];
+
+				function getFontSize() {
+					var width = window.screen.width || document.documentElement.clientWidth;
+					if (width < 750) {
+						_this.cutdown = 6;
+						_this.card = _this.card.splice(0, 12);
+					}
+					if (width > 1260) {
+						width = 1260;
+					}
+					return (100 / 1260) * width;
+				}
+				html.style.fontSize = getFontSize() + "px";
+				window.onresize = function () {
+					console.log("onresize")
+					setTimeout(function () {
+						html.style.fontSize = getFontSize() + "px";
+					}, 100);
+				};
+			}
+		})
+	</script>
+</body>
+
 </html>
