@@ -1,3 +1,4 @@
 /express-test/node_modules
 */node_modules
 ~/node_modules
+/websocket/server/node_modules
